@@ -1,13 +1,11 @@
 import React from 'react'
-import styles from "./App.module.css";
-import img from "./coding-event.jpg";
+
+import { RouterProvider } from 'react-router-dom';
+import { router } from './pages/Routes/Dashboard';
+
 const App = () => {
-  return (
-    <>
-    <h1 className={styles.text}><center>Web-pack</center></h1>
-    <img src={img} alt="" />
-    </>
-  )
+  return  <RouterProvider router={router} />
+ 
 }
 
 export default App

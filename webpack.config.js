@@ -1,11 +1,16 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    mode: "development",
-  entry: "./src/index.js",
+  mode: "development",
+  entry: {
+    index: "./src/index.js",
+  },
+
   output: {
-    filename: "main.js",
+    filename: "[name].bundle.js",
+    assetModuleFilename: "images/[hash][ext][query]",
     path: path.resolve(__dirname, "dist"),
     clean: true,
   },
@@ -31,6 +36,11 @@ module.exports = {
       template: "./public/index.html",
       favicon: "./public/favicon.ico",
     }),
+    new CopyPlugin({
+      patterns: [
+        { from: "public", to: "images" },
+      ],
+    }),
   ],
   devServer: {
     static: path.join(__dirname, "dist"),
@@ -38,9 +48,18 @@ module.exports = {
     open: true,
     hot: true,
     compress: true,
+    historyApiFallback: {
+      disableDotRule: true,
+    },
   },
   resolve: {
-    extensions: [".js", ".jsx", ".ts",".tsx"],
+    extensions: [".js", ".jsx", ".ts", ".tsx"],
   },
-  devtool: "source-map",
+  optimization: {
+    splitChunks: {
+      chunks: "all",
+    },
+  },
+
+  devtool: "cheap-module-source-map",
 };
