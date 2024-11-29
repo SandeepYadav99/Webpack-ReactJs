@@ -60,6 +60,5 @@ module.exports = {
       chunks: "all",
     },
   },
-
-  devtool: "cheap-module-source-map",
+devtool: "cheap-module-source-map",
 };

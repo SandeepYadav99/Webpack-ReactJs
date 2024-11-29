@@ -14,5 +14,4 @@ export const router = createBrowserRouter([
       { path: "about", element: <Suspense fallback={<div>Loading...</div>}><About /></Suspense> },
     ],
   },
-  
 ]);
